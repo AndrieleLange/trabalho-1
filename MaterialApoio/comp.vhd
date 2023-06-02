@@ -24,16 +24,23 @@ begin
   process(clock, reset)
   begin
     if reset = '1' then
-      igual <= 0;
+      igual <= 0;--pq igual recebe 0?
     elsif rising_edge(clock) then
       if prog = '1' then 
         padrao <= pattern;
+        --elsif pra dizer que se prog = '0' padrão<= (others 0) algo assim
+        -- mas não sei se é certo 
       end if;
     end if;
   end process;
 
   process(dado, padrao)
   begin
+    --if habilita = '1' then
+    --  (passa o igual) match <= igual
+    -- ainda tem que fazer o comp:
+    -- ele recebe dado e padrao
+    -- e vê se é igual (????)
     
 
   end process;
