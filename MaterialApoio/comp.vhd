@@ -27,20 +27,28 @@ begin
       igual <= 0;--pq igual recebe 0?
     elsif rising_edge(clock) then
       if prog = '1' then 
-        padrao <= pattern;
-        --elsif pra dizer que se prog = '0' padrão<= (others 0) algo assim
-        -- mas não sei se é certo 
+        padrao <= pattern; 
+      end if;
+      --elsif pra dizer que se prog = '0' padrão<= (others 0) algo assim
+        -- mas não sei se é certo
+        --acho que seria assim
+      if prog ='0' then
+        padrao <= (others => '0');
       end if;
     end if;
   end process;
 
+  -- esse seira o and
   process(dado, padrao)
   begin
-    --if habilita = '1' then
-    --  (passa o igual) match <= igual
-    -- ainda tem que fazer o comp:
+    if habilita = '1' then
+      a <= dado;
+      b <= padrao;
+      igual <= '1' when a=b else '0';-- não sei se é isso
     -- ele recebe dado e padrao
     -- e vê se é igual (????)
+    --  (passa o igual) match <= igual
+    end if;
     
 
   end process;
