@@ -50,8 +50,8 @@ begin
   -- MAQUINA DE ESTADOS (FSM)
 
   -- SAIDAS
-  alarme <= . . . 
-  dout   <= din AND NOT alarm_int;--not alarm_int (alarme interno)
+  alarme <= alarm_int; 
+  dout   <= din AND (NOT alarm_int);--not alarm_int (alarme interno)
   numero <=  . . . --recebe o codificador
 
 end architecture;
