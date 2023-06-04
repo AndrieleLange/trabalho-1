@@ -21,6 +21,7 @@ architecture a1 of compara_dado is
    
 begin
 
+
   process(clock, reset)
   begin
     if reset = '1' then
@@ -31,7 +32,7 @@ begin
       end if;
       --elsif pra dizer que se prog = '0' padrão<= (others 0) algo assim
         -- mas não sei se é certo
-        --acho que seria assim
+        --acho que seria assim:
       if prog ='0' then
         padrao <= (others => '0');
       end if;
@@ -43,13 +44,10 @@ begin
   begin
     if habilita = '1' then
       igual <= '1' when dado = padrao else '0';-- não sei se é isso
-    -- ele recebe dado e padrao
-    -- e vê se é igual (????)
-    --  (passa o igual) match <= igual
+      --mas eu vi no youtube e a principio é isso mesmo
     end if;
-    
-
   end process;
-    
+
+  match <= habilita AND igual;
 
 end a1;
