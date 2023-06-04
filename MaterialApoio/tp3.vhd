@@ -11,7 +11,12 @@ use IEEE.std_logic_unsigned.all;
 entity tp3 is 
   port (clock   : in std_logic;
         reset   : in std_logic;
-        . . .
+        din     : in std_logic;
+        padrao  : in std_logic_vector(7 downto 0);
+        prog    : in std_logic_vector(2 downto 0);
+        dout    : out std_logic;
+        alarme  : out std_logic;
+        numero  : out std_logic_vector(1 downto 0); 
         );
 end entity; 
 
@@ -19,9 +24,12 @@ end entity;
 -- Arquitetura
 --------------------------------------
 architecture tp3 of tp3 is
-  type state is ( . . .);
-  signal EA, PE: state;
-  . . . 
+  type state is ( . . .); --?????????
+  signal EA, PE: state;-- oq é state?
+  signal data : std_logic_vector(7 downto 0);
+  signal found : std_logic;
+  -- falta os match, 
+
 begin  
 
   -- REGISTRADOR DE DESLOCAMENTO QUE RECEBE O FLUXO DE ENTRADA
@@ -43,7 +51,7 @@ begin
 
   -- SAIDAS
   alarme <= . . . 
-  dout   <= . . . 
-  numero <=  . . . 
+  dout   <= din AND NOT alarm_int;--not alarm_int (alarme interno)
+  numero <=  . . . --recebe o codificador
 
 end architecture;
