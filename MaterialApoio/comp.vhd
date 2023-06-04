@@ -33,9 +33,9 @@ begin
       --elsif pra dizer que se prog = '0' padrão<= (others 0) algo assim
         -- mas não sei se é certo
         --acho que seria assim:
-      if prog ='0' then
-        padrao <= (others => '0');
-      end if;
+     -- if prog ='0' then
+       -- padrao <= (others => '0');
+     -- end if;
     end if;
   end process;
 
