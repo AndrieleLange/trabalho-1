@@ -24,7 +24,8 @@ end entity;
 -- Arquitetura
 --------------------------------------
 architecture tp3 of tp3 is
-  type state is ( . . .); --?????????
+  type state is ( . . .); -- criação de um tipo, dentro do parenteses vai oq ele pode assumir
+  -- https://www.youtube.com/watch?v=EDodM1aPJdU   link de um vídeo que eu vi isso
   signal EA, PE: state;-- oq é state?
   signal data : std_logic_vector(7 downto 0);
   signal found : std_logic;
