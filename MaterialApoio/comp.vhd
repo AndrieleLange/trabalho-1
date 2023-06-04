@@ -20,8 +20,6 @@ architecture a1 of compara_dado is
    signal igual: std_logic;
    
 begin
-
-
   process(clock, reset)
   begin
     if reset = '1' then
@@ -30,16 +28,9 @@ begin
       if prog = '1' then 
         padrao <= pattern; 
       end if;
-      --elsif pra dizer que se prog = '0' padrão<= (others 0) algo assim
-        -- mas não sei se é certo
-        --acho que seria assim:
-     -- if prog ='0' then
-       -- padrao <= (others => '0');
-     -- end if;
     end if;
   end process;
 
-  -- esse seira o and
   process(dado, padrao)
   begin
     if habilita = '1' then
