@@ -42,9 +42,7 @@ begin
   process(dado, padrao)
   begin
     if habilita = '1' then
-      a <= dado;
-      b <= padrao;
-      igual <= '1' when a=b else '0';-- não sei se é isso
+      igual <= '1' when dado = padrao else '0';-- não sei se é isso
     -- ele recebe dado e padrao
     -- e vê se é igual (????)
     --  (passa o igual) match <= igual
