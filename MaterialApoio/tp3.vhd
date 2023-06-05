@@ -36,12 +36,61 @@ architecture tp3 of tp3 is
 begin  
 
   -- REGISTRADOR DE DESLOCAMENTO QUE RECEBE O FLUXO DE ENTRADA
+  process (clock, reset)
+  begin
+    if reset = '1' then
+      data <= (others => '0');
+    elsif rising_edge(clock) then
+      data <= din & data(7 downto 1);
+    end if;
+  end process;
   -- buffer 
 
   -- 4 PORT MAPS PARA OS ompara_dado 
-   cd1: entity work.compara_dado
-        port map(clock=> clock, reset=> reset, dado=>data, pattern=> padrao, prog => program(0), habilita=> sel(0), match => match(0)); 
-  -- repetir isso mais 3 vezes
+   compara1: entity work.compara_dado
+    port map (
+      clock => clock,
+      reset => reset,
+      dado => data,
+      pattern => padrao,
+      prog => program(0),
+      habilita => sel(0),
+      match => match(0)
+    );
+  
+  compara2: entity work.compara_dado
+    port map (
+      clock => clock,
+      reset => reset,
+      dado => data,
+      pattern => padrao,
+      prog => program(1),
+      habilita => sel(1),
+      match => match(1)
+    );
+  
+  compara3: entity work.compara_dado
+    port map (
+      clock => clock,
+      reset => reset,
+      dado => data,
+      pattern => padrao,
+      prog => program(2),
+      habilita => sel(2),
+      match => match(2)
+    );
+  
+  compara4: entity work.compara_dado
+    port map (
+      clock => clock,
+      reset => reset,
+      dado => data,
+      pattern => padrao,
+      prog => program(3),
+      habilita => sel(3),
+      match => match(3)
+    );
+     
 
   
   found   <=  . . . 
@@ -55,6 +104,18 @@ begin
   --  registradores para ativar as comparações
 
   --  registrador para o alarme interno
+    process (clock, reset)
+  begin
+    if reset = '1' then
+      alarm_int <= '0';
+    elsif rising_edge(clock) then
+      if found = '1' then
+        alarm_int <= '1';
+      elsif PE = bloqueio then
+        alarm_int <= '0';
+      end if;
+    end if;
+  end process;
 
   -- MAQUINA DE ESTADOS (FSM)
 
