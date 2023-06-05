@@ -29,7 +29,8 @@ architecture tp3 of tp3 is
   signal EA, PE: state;-- oq é state?
   signal data : std_logic_vector(7 downto 0);
   signal found : std_logic;
-  signal match : std_logic;
+  signal match : std_logic_vector(2 downto 0);
+  signal alarm_int : std_logic;
 
 begin  
 
@@ -39,6 +40,7 @@ begin
 
   found   <=  . . . 
 
+-- pedras, areia, vermes e peixes
   program(0) <= . . .
   program(1) <= . . .
   program(2) <= . . .
