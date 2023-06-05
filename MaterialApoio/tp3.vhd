@@ -41,7 +41,7 @@ begin
     if reset = '1' then
       data <= (others => '0');
     elsif rising_edge(clock) then
-      data <= din & data(7 downto 1);
+      data <= din & data(7 downto 1);--perguntar se isso pode
     end if;
   end process;
 
