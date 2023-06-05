@@ -31,13 +31,7 @@ begin
     end if;
   end process;
 
-  process(dado, padrao)
-  begin
-    if habilita = '1' then
-      igual <= '1' when dado = padrao else '0';-- não sei se é isso
-      --mas eu vi no youtube e a principio é isso mesmo
-    end if;
-  end process;
+  igual <= '1' when dado = padrao else '0';
 
   match <= habilita AND igual;
 
