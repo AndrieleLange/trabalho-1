@@ -24,7 +24,7 @@ end entity;
 -- Arquitetura
 --------------------------------------
 architecture tp3 of tp3 is
-  type state is ( . . .); -- criação de um tipo, dentro do parenteses vai oq ele pode assumir
+  type state is (s0, A, B, C, D, buscando, block, zerar); -- criação de um tipo, dentro do parenteses vai oq ele pode assumir
   -- buscando, bloqueio, inicial
   -- https://www.youtube.com/watch?v=EDodM1aPJdU link de um vídeo que eu vi isso
   signal EA, PE: state;-- oq é state?
@@ -44,7 +44,6 @@ begin
       data <= din & data(7 downto 1);
     end if;
   end process;
-  -- buffer 
 
   -- 4 PORT MAPS PARA OS ompara_dado 
    compara1: entity work.compara_dado
@@ -93,7 +92,7 @@ begin
      
 
   
-  found   <=  . . . 
+  found   <=  (match(0) OR match(1) OR match(2) OR match(3));
 
 -- pedras, areia, vermes e peixes
   program(0) <= . . .
@@ -102,6 +101,8 @@ begin
   program(3) <= . . .
   
   --  registradores para ativar as comparações
+
+
 
   --  registrador para o alarme interno
     process (clock, reset)
@@ -118,6 +119,24 @@ begin
   end process;
 
   -- MAQUINA DE ESTADOS (FSM)
+  process(clock, reset)
+      begin
+        if reset='1' then
+          EA <= s0;
+        elsif rising_edge(clock) then
+          EA <= PE;
+        end if;
+  end process;
+
+  process(EA, prog, found)
+    begin
+      case EA is
+          -- when S0 => if prog='0' then PE <=S0; else PE <= S2; end if;
+          -- when S1 => if X='0' then PE <=S0; else PE <= S2; end if;
+          -- when S2 => if X='0' then PE <=S2; else PE <= S3; end if;
+          -- when S3 => if X='0' then PE <=S3; else PE <= S1; end if;
+      end case;
+end process;
 
   -- SAIDAS
   alarme <= alarm_int; 
