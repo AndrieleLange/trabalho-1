@@ -40,7 +40,7 @@ begin
 
   -- 4 PORT MAPS PARA OS ompara_dado 
    cd1: entity work.compara_dado
-        port map(clock=> clock, reset=> reset, dado=>data, pattern=> padrao, prog => program(0), habilita=> sel(0)); 
+        port map(clock=> clock, reset=> reset, dado=>data, pattern=> padrao, prog => program(0), habilita=> sel(0), match => match(0)); 
   -- repetir isso mais 3 vezes
 
   
