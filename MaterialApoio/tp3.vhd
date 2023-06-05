@@ -29,7 +29,7 @@ architecture tp3 of tp3 is
   signal EA, PE: state;-- oq é state?
   signal data : std_logic_vector(7 downto 0);
   signal found : std_logic;
-  -- falta os match, 
+  signal match : std_logic;
 
 begin  
 
@@ -53,6 +53,11 @@ begin
   -- SAIDAS
   alarme <= alarm_int; 
   dout   <= din AND (NOT alarm_int);--not alarm_int (alarme interno)
-  numero <=  . . . --recebe o codificador
+  numero <= ('11' when match(3) = '1' else
+             '10' when match(2) = '1' else
+             '01' when match(1) = '1' else
+             '00' when match(0) = '1');--normalmente a gente não faz o último else completo
+             --só que a gente só quer que passe se o algum deles for '1'
+             --acho que se não fizer isso ele dá erro
 
 end architecture;
