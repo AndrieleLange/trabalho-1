@@ -100,12 +100,17 @@ begin
   --  registradores para ativar as comparações
   process(clock,reset)
   begin 
-  if reset='1' OR EA = zerar then
+  if reset='1' then
       sel(0)<='0';
       sel(1)<='0';
       sel(2)<='0';
       sel(3)<='0';
     if rising_edge(clock) begin 
+      if EA = zerar then 
+       sel(0)<='0';
+      sel(1)<='0';
+      sel(2)<='0';
+      sel(3)<='0';
       if EA = A then
         sel(0)<='1';
       if EA = B then
@@ -120,6 +125,7 @@ begin
   end if;
   end if;
   end if;
+  end if;
  end process;
 
  
@@ -127,18 +133,21 @@ begin
   --  registrador para o alarme interno
     process (clock, reset)
   begin
-    if reset = '1' OR EA = zerar then
+    if reset = '1' then
       alarm_int <= '0';
     elsif rising_edge(clock) then
-      if EA = "101" then
+      if EA = zerar then
+        alarm_int<= '0';
+      if EA = buscando then
         alarm_int <= found;
         if found = '1' then
-          PE<= "110";
-      elsif EA = "110" then
+          PE<= bloqueio;
+      elsif EA = bloqueio then
         alarm_int <= '0';
       end if;
     end if;
     end if;
+      end if;
   end process;
 
   -- MAQUINA DE ESTADOS (FSM)
