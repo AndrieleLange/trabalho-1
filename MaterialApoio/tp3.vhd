@@ -24,10 +24,8 @@ end entity;
 -- Arquitetura
 --------------------------------------
 architecture tp3 of tp3 is
-  type state is (s0, A, B, C, D, buscando, block, zerar); -- criação de um tipo, dentro do parenteses vai oq ele pode assumir
-  -- buscando, bloqueio, inicial
-  -- https://www.youtube.com/watch?v=EDodM1aPJdU link de um vídeo que eu vi isso
-  signal EA, PE: state;-- oq é state?
+  type state is (s0, A, B, C, D, buscando, bloqueio, zerar); 
+  signal EA, PE: state;
   signal data : std_logic_vector(7 downto 0);
   signal found : std_logic;
   signal match : std_logic_vector(2 downto 0);
@@ -92,13 +90,12 @@ begin
      
 
   
-  found   <=  (match(0) OR match(1) OR match(2) OR match(3));
+  found <= (match(0) OR match(1) OR match(2) OR match(3));
 
--- pedras, areia, vermes e peixes
-  program(0) <= . . .
-  program(1) <= . . .
-  program(2) <= . . .
-  program(3) <= . . .
+  program(0) <= '1' when EA = '001' else '0';
+  program(1) <= '1' when EA = '010' else '0';
+  program(2) <= '1' when EA = '011' else '0';
+  program(3) <= '1' when EA = '100' else '0';
   
   --  registradores para ativar as comparações
 
@@ -110,9 +107,11 @@ begin
     if reset = '1' then
       alarm_int <= '0';
     elsif rising_edge(clock) then
-      if found = '1' then
-        alarm_int <= '1';
-      elsif PE = bloqueio then
+      if EA = '101' then
+        alarm_int <= found;
+        if found = '1' then
+          PE<= '110';
+      elsif EA = '110' then
         alarm_int <= '0';
       end if;
     end if;
@@ -131,10 +130,18 @@ begin
   process(EA, prog, found)
     begin
       case EA is
-          -- when S0 => if prog='0' then PE <=S0; else PE <= S2; end if;
-          -- when S1 => if X='0' then PE <=S0; else PE <= S2; end if;
-          -- when S2 => if X='0' then PE <=S2; else PE <= S3; end if;
-          -- when S3 => if X='0' then PE <=S3; else PE <= S1; end if;
+          when S0 => 
+              if prog='001' then PE <=A;
+              else PE <= S0; end if;
+          when A => 
+              if prog='010' then PE <=B;
+              else PE <=; end if;
+          when B => 
+              if prog='010' then PE <=B; --else PE <= S3; end if;
+          when C => if prog='011' then PE <=C; --else PE <= S1; end if;
+          when D => if prog='011' then PE <=D; --else PE <= S1; end if;
+
+
       end case;
 end process;
 
@@ -145,7 +152,7 @@ end process;
              '10' when match(2) = '1' else
              '01' when match(1) = '1' else
              '00' when match(0) = '1');--normalmente a gente não faz o último else completo
-             --só que a gente só quer que passe se o algum deles for '1'
+             --só que a gente só quer que passe se algum deles for '1'
              --acho que se não fizer isso ele dá erro
 
 end architecture;
