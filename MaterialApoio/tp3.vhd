@@ -119,6 +119,7 @@ begin
   end if;
   end if;
   end if;
+  end if;
  end process;
 
  
@@ -129,13 +130,14 @@ begin
     if reset = '1' OR EA = zerar then
       alarm_int <= '0';
     elsif rising_edge(clock) then
-      if EA = '101' then
+      if EA = "101" then
         alarm_int <= found;
         if found = '1' then
-          PE<= '110';
-      elsif EA = '110' then
+          PE<= "110";
+      elsif EA = "110" then
         alarm_int <= '0';
       end if;
+    end if;
     end if;
   end process;
 
