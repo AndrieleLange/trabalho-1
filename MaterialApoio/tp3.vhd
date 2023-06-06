@@ -28,7 +28,7 @@ architecture tp3 of tp3 is
   signal EA, PE: state;
   signal data : std_logic_vector(7 downto 0);
   signal found : std_logic;
-  signal match : std_logic_vector(2 downto 0);
+  signal match, sel, program: std_logic_vector(2 downto 0);
   signal alarm_int : std_logic;
 
 begin  
@@ -198,3 +198,4 @@ end process;
              '00' );
 
 end architecture;
+
