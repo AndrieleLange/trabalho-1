@@ -11,7 +11,8 @@ entity compara_dado is
         pattern  : in std_logic_vector(7 downto 0);
         prog     : in std_logic;
         habilita : in std_logic;
-        match    : out std_logic);
+        match    : out std_logic
+      );
 end compara_dado; 
 
 architecture a1 of compara_dado is
