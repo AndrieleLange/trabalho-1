@@ -43,11 +43,10 @@ architecture tb of tb is
     --padrão novo:
     (t => 115, prog => "001", padrao => x"0E"),
     (t => 125, prog => "101", padrao => x"FF"),    -- ATIVA A COMPARAÇÃO (5)
-    (t => 145, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
-    (t => 150, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
-    (t => 160, prog => "111", padrao => x"FF")     -- reinicializa (7)
+    (t => 135, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    (t => 140, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    (t => 145, prog => "111", padrao => x"FF")     -- reinicializa (7)
   );
-
 
   -- LFSR: ----------------------------------------------- x^19+x^18+x^17+x^14+xˆ9+1
   constant GP : integer := 19 ;
