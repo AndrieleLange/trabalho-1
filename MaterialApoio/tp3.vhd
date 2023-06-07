@@ -87,7 +87,7 @@ begin
       match => match(3)
     );
 
-  found <= '1' when (match(0) OR match(1) OR match(2) OR match(3)) else '0';
+  found <= match(0) OR match(1) OR match(2) OR match(3);
 
   program(0) <= '1' when EA = A else '0';
   program(1) <= '1' when EA = B else '0';
@@ -131,14 +131,11 @@ begin
         alarm_int<= '0';
       if EA = buscando then
         alarm_int <= found;
-        if found = '1' then
-          PE<= bloqueio;
       elsif EA = bloqueio then
         alarm_int <= '0';
       end if;
     end if;
     end if;
-      end if;
   end process;
 
   -- MAQUINA DE ESTADOS (FSM)
@@ -181,10 +178,10 @@ end process;
   -- SAIDAS
   alarme <= alarm_int; 
   dout   <= din AND (NOT alarm_int);--not alarm_int (alarme interno)
-  numero <= ('11' when match(3) = '1' else
-             '10' when match(2) = '1' else
-             '01' when match(1) = '1' else
-             '00' );
+  numero <= "11" when match(3) = '1' else
+             "10" when match(2) = '1' else
+             "01" when match(1) = '1' else
+             "00" ;
 
 end architecture;
 
