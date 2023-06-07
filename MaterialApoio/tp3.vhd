@@ -16,8 +16,7 @@ entity tp3 is
         prog    : in std_logic_vector(2 downto 0);
         dout    : out std_logic;
         alarme  : out std_logic;
-        numero  : out std_logic_vector(1 downto 0); 
-        );
+        numero  : out std_logic_vector(1 downto 0) );
 end entity; 
 
 --------------------------------------
@@ -87,10 +86,8 @@ begin
       habilita => sel(3),
       match => match(3)
     );
-     
 
-  
-  found <= (match(0) OR match(1) OR match(2) OR match(3));
+  found <= '1' when (match(0) OR match(1) OR match(2) OR match(3)) else '0';
 
   program(0) <= '1' when EA = A else '0';
   program(1) <= '1' when EA = B else '0';
@@ -105,27 +102,21 @@ begin
       sel(1)<='0';
       sel(2)<='0';
       sel(3)<='0';
-    if rising_edge(clock) begin 
+    elsif rising_edge(clock) then 
       if EA = zerar then 
-       sel(0)<='0';
-      sel(1)<='0';
-      sel(2)<='0';
-      sel(3)<='0';
+        sel(0)<='0';
+        sel(1)<='0';
+        sel(2)<='0';
+        sel(3)<='0'; end if;
       if EA = A then
-        sel(0)<='1';
+        sel(0)<='1';end if;
       if EA = B then
-        sel(1)<='1';
+        sel(1)<='1';end if;
       if EA = C then
-        sel(2)<='1';
+        sel(2)<='1';end if;
       if EA = B then
-        sel(3)<='1';
+        sel(3)<='1';end if;
     end if;
-  end if;
-  end if;
-  end if;
-  end if;
-  end if;
-  end if;
  end process;
 
  
@@ -165,8 +156,6 @@ begin
       case EA is
           when S0 => 
               if prog="001" then PE <= A;
-              else
-                
               elsif prog="010" then PE <=B;
               elsif prog="011" then PE <=C;
               elsif prog="100" then PE <=D;

@@ -23,7 +23,7 @@ begin
   process(clock, reset)
   begin
     if reset = '1' then
-      igual <= 0;
+      igual <= '0';
     elsif rising_edge(clock) then
       if prog = '1' then 
         padrao <= pattern; 
