@@ -24,21 +24,35 @@ architecture tb of tb is
 
   type padroes is array(natural range <>) of test_record;
    constant padrao_de_teste : padroes := (
-    (t =>   4, prog => "001", padrao => x"24"),   
-    (t =>  10, prog => "010", padrao => x"B8"),
-    (t =>  15, prog => "011", padrao => x"D4"),
-    (t =>  20, prog => "100", padrao => x"65"),    
+    -- (t =>   4, prog => "001", padrao => x"24"),   
+    -- (t =>  10, prog => "010", padrao => x"B8"),
+    -- (t =>  15, prog => "011", padrao => x"D4"),
+    -- (t =>  20, prog => "100", padrao => x"65"),    
+    -- (t =>  35, prog => "101", padrao => x"FF"),    -- ATIVA A COMPARAÇÃO (5)
+    -- (t =>  55, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    -- (t =>  70, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    -- (t => 105, prog => "111", padrao => x"FF"),     -- reinicializa (7)
+    (t =>   4, prog => "001", padrao => x"73"),
+    (t =>  10, prog => "010", padrao => x"67"),
+    (t =>  15, prog => "011", padrao => x"15"),
+    (t =>  20, prog => "100", padrao => x"25"),
     (t =>  35, prog => "101", padrao => x"FF"),    -- ATIVA A COMPARAÇÃO (5)
-    (t =>  55, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    (t =>  65, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
     (t =>  70, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
-    (t => 105, prog => "111", padrao => x"FF")     -- reinicializa (7)
+    (t => 105, prog => "111", padrao => x"FF"),     -- reinicializa (7)
+    --padrão novo:
+    (t => 115, prog => "001", padrao => x"0E"),
+    (t => 125, prog => "101", padrao => x"FF"),    -- ATIVA A COMPARAÇÃO (5)
+    (t => 145, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    (t => 150, prog => "110", padrao => x"FF"),    -- reinicia a comparação (6)
+    (t => 160, prog => "111", padrao => x"FF")     -- reinicializa (7)
   );
 
 
   -- LFSR: ----------------------------------------------- x^19+x^18+x^17+x^14+xˆ9+1
   constant GP : integer := 19 ;
   constant polinomio : std_logic_vector(GP-1 downto 0) := "1110010000100000000";
-  constant seed : std_logic_vector(GP-1 downto 0)      := "1101101110110110010";
+  constant seed : std_logic_vector(GP-1 downto 0)      := "1111101010110111111";
   signal lfsr, w_mask: std_logic_vector(GP-1 downto 0);
   ----------------------------------------------------------------------------
 

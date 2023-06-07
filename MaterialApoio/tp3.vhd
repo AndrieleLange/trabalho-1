@@ -119,8 +119,6 @@ begin
     end if;
  end process;
 
- 
-
   --  registrador para o alarme interno
     process (clock, reset)
   begin
@@ -129,12 +127,11 @@ begin
     elsif rising_edge(clock) then
       if EA = zerar then
         alarm_int<= '0';
-      if EA = buscando then
+      elsif EA = buscando then
         alarm_int <= found;
-      elsif EA = bloqueio then
-        alarm_int <= '0';
+      -- elsif EA = bloqueio then
+      --   alarm_int <= '0';
       end if;
-    end if;
     end if;
   end process;
 
@@ -177,7 +174,7 @@ end process;
 
   -- SAIDAS
   alarme <= alarm_int; 
-  dout   <= din AND (NOT alarm_int);--not alarm_int (alarme interno)
+  dout   <= din AND (NOT alarm_int);
   numero <= "11" when match(3) = '1' else
              "10" when match(2) = '1' else
              "01" when match(1) = '1' else
